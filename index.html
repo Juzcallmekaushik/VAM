@@ -11,42 +11,63 @@
             box-sizing: border-box;
         }
         body {
+            background: black;
+            color: white;
+            font-family: 'Arial', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: url('https://i.pinimg.com/originals/db/03/96/db039626bfa2ecc53f0f6e7f335aef4c.gif') no-repeat center center/cover;
-            backdrop-filter: brightness(0.3);
-            color: white;
-            font-family: 'Courier New', monospace;
             overflow: hidden;
-            text-align: center;
+            position: relative;
         }
-        .container {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 30px 50px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
         h1 {
             font-size: 3rem;
             text-transform: uppercase;
-            background: linear-gradient(90deg, #0f0, #0ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 10px #0f0;
-        }
-        p {
-            font-size: 1.2rem;
-            color: #ccc;
-            margin-top: 10px;
+            position: relative;
+            text-align: center;
+            z-index: 1;
+            text-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>AceTrac</h1>
-        <p>Something awesome is in the works...</p>
-    </div>
+    <canvas id="matrix"></canvas>
+    <h1>Coming Soon...</h1>
+    
+    <script>
+        const canvas = document.getElementById("matrix");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#0f0";
+            ctx.font = `${fontSize}px monospace`;
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters[Math.floor(Math.random() * letters.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        setInterval(drawMatrix, 50);
+    </script>
 </body>
 </html>
