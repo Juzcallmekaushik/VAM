@@ -15,74 +15,45 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: black;
+            background: rgba(0, 0, 0, 0.6);
+            font-family: Arial, sans-serif;
             overflow: hidden;
             position: relative;
         }
-        canvas {
+        .matrix-bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            opacity: 0.3; /* Dims the background */
+            z-index: -1;
+            opacity: 0.4;
         }
-        .container {
-            position: relative;
+        .content {
             text-align: center;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px 60px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
         }
         h1 {
             font-size: 4rem;
-            font-weight: bold;
             color: black;
+            font-weight: bold;
         }
         p {
             font-size: 1.5rem;
-            color: black;
+            color: white;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <canvas id="matrixCanvas"></canvas>
-    <div class="container">
+    <canvas class="matrix-bg"></canvas>
+    <div class="content">
         <h1>AceTrac</h1>
         <p>Coming on mobile devices soon!</p>
     </div>
-
-    <script>
-        const canvas = document.getElementById("matrixCanvas");
-        const ctx = canvas.getContext("2d");
-
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const matrixChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".split("");
-        const fontSize = 16;
-        const columns = canvas.width / fontSize;
-        const drops = Array(Math.floor(columns)).fill(1);
-
-        function drawMatrix() {
-            ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.fillStyle = "#0F0";
-            ctx.font = fontSize + "px monospace";
-            
-            drops.forEach((y, i) => {
-                const text = matrixChars[Math.floor(Math.random() * matrixChars.length)];
-                ctx.fillText(text, i * fontSize, y * fontSize);
-                
-                if (y * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
-            });
-        }
-        setInterval(drawMatrix, 50);
-    </script>
+    <script src="https://sumitkcs.github.io/matrix-effect/script.js"></script>
 </body>
 </html>
