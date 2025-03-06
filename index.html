@@ -16,35 +16,37 @@
             align-items: center;
             height: 100vh;
             background: url('https://i.pinimg.com/originals/db/03/96/db039626bfa2ecc53f0f6e7f335aef4c.gif') no-repeat center center/cover;
+            backdrop-filter: brightness(0.3);
             color: white;
-            font-family: Arial, sans-serif;
+            font-family: 'Courier New', monospace;
             overflow: hidden;
-            position: relative;
+            text-align: center;
         }
-        /* Dark overlay */
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6); /* Adjust opacity as needed */
+        .container {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 30px 50px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
         }
         h1 {
             font-size: 3rem;
             text-transform: uppercase;
-            position: relative; /* Keeps text above overlay */
-            z-index: 1;
-            animation: fadeIn 2s ease-in-out infinite alternate;
+            background: linear-gradient(90deg, #0f0, #0ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px #0f0;
         }
-        @keyframes fadeIn {
-            from { opacity: 0.3; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+        p {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <h1>Coming Soon...</h1>
+    <div class="container">
+        <h1>AceTrac</h1>
+        <p>Something awesome is in the works...</p>
+    </div>
 </body>
 </html>
